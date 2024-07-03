@@ -5,12 +5,15 @@ import { useParams } from "react-router-dom";
 const TaskDetails = () => {
   const [task, setTask] = useState({});
   const { id } = useParams();
-  console.log(process.env.REACT_APP_BASE_URL);
 
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_BASE_URL + `/api/tasks/${id}`)
-      .then((response) => setTask(response.data))
+      .then((response) => {
+        const task = response.data;
+        const formattedDate = new Date(task.dueDate).toLocaleDateString();
+        setTask({ ...task, dueDate: formattedDate });
+      })
       .catch((error) =>
         console.error("There was an error fetching the task!", error)
       );
