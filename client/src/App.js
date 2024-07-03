@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import TaskList from "./components/TaskList";
+import TaskForm from "./components/TaskForm";
+import TaskDetails from "./components/TaskDetails";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Routes>
+        <Route path="/" exact element={<TaskList />} />
+        <Route path="/add" element={<TaskForm />} />
+        <Route path="/edit/:id" element={<TaskForm />} />
+        <Route path="/tasks/:id" element={<TaskDetails />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
